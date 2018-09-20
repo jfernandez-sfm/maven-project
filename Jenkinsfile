@@ -28,7 +28,7 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        bat 'scp -i "\opt\AWS\tomcat-demo.pem" webapp/target/webapp.war ec2-user@18.216.160.250:/var/lib/tomcat7/webapps'
+                        bat 'scp -i "\\opt\\AWS\\tomcat-demo.pem" webapp/target/webapp.war ec2-user@18.216.160.250:/var/lib/tomcat7/webapps'
                         
                     }
                 }

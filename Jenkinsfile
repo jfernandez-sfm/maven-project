@@ -25,7 +25,7 @@ pipeline {
                     input message: 'Approve PRODUCTION Deployment'
                 }
 
-                built job: 'deploy-to-prod'
+                build job: 'deploy-to-prod'
             }
             post{
                 success{

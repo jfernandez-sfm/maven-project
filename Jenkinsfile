@@ -25,7 +25,7 @@ pipeline {
                     input message: 'Approve PRODUCTION Deployment'
                 }
 
-                echo 'built job: Deploy-to-Prod'
+                built job: 'deploy-to-prod'
             }
             post{
                 success{

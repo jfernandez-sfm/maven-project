@@ -4,7 +4,7 @@ pipeline {
     parameters {
          string(name: 'tomcat_staging', defaultValue: '18.216.160.250', description: 'Staging Server')
          string(name: 'tomcat_prod', defaultValue: '52.15.81.206', description: 'Production Server')
-         string(name: 'aws-key', defaultValue: '/opt/AWS/tomcat-demo.pem', description: 'AWS key full path')
+         string(name: 'aws-key', defaultValue: '\\opt\\AWS\\tomcat-demo.pem', description: 'AWS key full path')
     }
 
     triggers {
@@ -28,14 +28,14 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        powershell 'scp -i "\\opt\\AWS\\tomcat-demo.pem" webapp/target/webapp.war ec2-user@18.216.160.250:/var/lib/tomcat7/webapps'
+                        powershell 'scp -i "${params.aws-key}" webapp/target/webapp.war ec2-user@${params.tomcat_staging}:/var/lib/tomcat7/webapps'
                         
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        bat "scp -i /opt/AWS/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+                        powershell 'scp -i "${params.aws-key}" webapp/target/webapp.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps'
                     }
                 }
             }
